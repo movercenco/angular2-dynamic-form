@@ -19,7 +19,7 @@ export class FormService {
             }
         }
 
-        return fields.sort((a, b) => a.order - b.order);
+        return fields;
     }
 
 
@@ -34,8 +34,16 @@ export class FormService {
                     key: 'name',
                     label: 'Name',
                     type: 'text',
-                    value: 'TestName',
-                    required: true,
+                    value: '',
+                    validation: [
+                        {
+                            rule: 'required',
+                            value: true
+                        }, {
+                            rule: 'minlength',
+                            value: 5
+                        }
+                    ],
                     order: 1
                 },
                 {
@@ -44,7 +52,12 @@ export class FormService {
                     label: 'Email',
                     type: 'email',
                     value: '',
-                    required: true,
+                    validation: [
+                        {
+                            rule: 'required',
+                            value: true
+                        }
+                    ],
                     order: 3
                 },
                 {
@@ -53,7 +66,7 @@ export class FormService {
                     label: 'Password',
                     type: 'password',
                     value: '',
-                    required: true,
+                    validation: [],
                     order: 2
                 }
             ]

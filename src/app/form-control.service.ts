@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {FieldBase} from './field-base';
+import {AbstractControl} from '@angular/forms/src/model';
 
 @Injectable({
     providedIn: 'root'
@@ -10,12 +11,25 @@ export class FormControlService {
     constructor() {
     }
 
-    toFormGroup(questions: FieldBase<any>[]) {
+    toFormGroup(fields: FieldBase<any>[]) {
         let group: any = {};
 
-        questions.forEach(question => {
-            group[question.key] = question.required ? new FormControl(question.value || '', Validators.required)
-                : new FormControl(question.value || '');
+        fields.forEach(field => {
+            let validation_rule = [];
+            if (field.validation !== {}) {
+                field.validation.forEach(rule => {
+                    switch (rule.rule) {
+                        case 'required':
+                            validation_rule.push(Validators.required);
+                            break;
+                        case 'minlength':
+                            validation_rule.push(Validators.minLength(rule.value));
+                            break;
+                    }
+                });
+            }
+
+            group[field.key] = new FormControl(field.value || '', validation_rule);
         });
         return new FormGroup(group);
     }
