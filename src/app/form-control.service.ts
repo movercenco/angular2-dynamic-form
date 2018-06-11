@@ -16,7 +16,7 @@ export class FormControlService {
 
         fields.forEach(field => {
             let validation_rule = [];
-            if (field.validation !== {}) {
+            if (field.validation.length > 0) {
                 field.validation.forEach(rule => {
                     switch (rule.rule) {
                         case 'required':

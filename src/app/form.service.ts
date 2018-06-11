@@ -43,8 +43,7 @@ export class FormService {
                             rule: 'minlength',
                             value: 5
                         }
-                    ],
-                    order: 1
+                    ]
                 },
                 {
                     control_yype: 'textbox',
@@ -57,8 +56,7 @@ export class FormService {
                             rule: 'required',
                             value: true
                         }
-                    ],
-                    order: 3
+                    ]
                 },
                 {
                     control_yype: 'textbox',
@@ -66,8 +64,7 @@ export class FormService {
                     label: 'Password',
                     type: 'password',
                     value: '',
-                    validation: [],
-                    order: 2
+                    validation: []
                 }
             ]
         };
